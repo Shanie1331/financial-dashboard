@@ -1,14 +1,11 @@
-import styled from 'tailwind';
+import React from 'react';
 
-const StyledSharedUi = styled.div`
-  color: pink;
-`;
-export function SharedUi() {
+const StyledSharedUi = () => {
   return (
-    <StyledSharedUi>
-      <h1>Welcome to SharedUi!</h1>
-    </StyledSharedUi>
+    <div className="text-pink-500">
+      This is a shared UI component!
+    </div>
   );
-}
+};
 
-export default SharedUi;
+export default StyledSharedUi;
