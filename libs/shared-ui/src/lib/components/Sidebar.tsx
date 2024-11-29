@@ -1,42 +1,87 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
 
 const Sidebar = () => {
+  const location = useLocation(); // Get current pathname
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // State to toggle sidebar
+
   const menuItems = [
-    { name: 'Dashboard', icon: '🏠', active: true },
-    { name: 'Transactions', icon: '💸', active: false },
-    { name: 'Accounts', icon: '👤', active: false },
-    { name: 'Investments', icon: '📈', active: false },
-    { name: 'Credit Cards', icon: '💳', active: false },
-    { name: 'Loans', icon: '🏦', active: false },
-    { name: 'Services', icon: '🛠️', active: false },
-    { name: 'My Privileges', icon: '💡', active: false },
-    { name: 'Setting', icon: '⚙️', active: false },
+    { name: 'Dashboard', icon: '🏠', path: '/' },
+    { name: 'Transactions', icon: '💸', path: '/transactions' },
+    { name: 'Accounts', icon: '👤', path: '/accounts' },
+    { name: 'Investments', icon: '📈', path: '/investments' },
+    { name: 'Credit Cards', icon: '💳', path: '/credit-cards' },
+    { name: 'Loans', icon: '🏦', path: '/loans' },
+    { name: 'Services', icon: '🛠️', path: '/services' },
+    { name: 'My Privileges', icon: '💡', path: '/privileges' },
+    { name: 'Setting', icon: '⚙️', path: '/settings' },
   ];
 
   return (
-    <div className="items-center justify-between bg-white shadow-md flex flex-col">
-      <div className="flex items-center w-full h-[100px]">
-        <div className="flex items-center space-x-2">
-          <div className="w-8 h-8 bg-black rounded-md flex items-center justify-center">
-            <span className="text-white text-lg">✓</span>
-          </div>
-          <span className="text-xl font-bold text-gray-800">Soar Task</span>
-        </div>
+    <div>
+      {/* Hamburger Menu for Mobile View */}
+      <div className="lg:hidden flex items-center  h-[100px]  px-4 py-2 bg-white border-b">
+        <button
+          className="text-3xl text-gray-700 focus:outline-none"
+          onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+        >
+          ☰
+        </button>
       </div>
-      <ul className="flex w-full flex-col">
+
+      {/* Sidebar */}
+      <div
+        className={`fixed lg:static top-0 left-0 h-screen w-64 bg-white border-r transform ${
+          isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+        } transition-transform lg:translate-x-0 z-50`}
+      >
+        {/* Logo Section */}
+        <div className="flex items-center w-full h-[100px] px-4">
+          <div className="flex items-center space-x-2">
+            <div className="w-8 h-8 bg-black rounded-md flex items-center justify-center">
+              <span className="text-white text-xl">✓</span>
+            </div>
+            <span className="text-2xl font-bold text-[#343C6A]">Soar Task</span>
+          </div>
+        </div>
+
+        {/* Menu Items */}
+        <ul className="flex flex-col">
           {menuItems.map((item, index) => (
-            <li
-              key={index}
-              className={`flex p-2 rounded-md cursor-pointer  ${
-                item.active ? 'text-black' : 'text-gray-400 hover:text-black '
-              }`}
-            >
-                {item.active && <div className="w-[5px] bg-black rounded-r-lg" ></div>}
-              <span className="text-xl p-2">{item.icon}</span>
-              <span className="text-base font-medium p-2">{item.name}</span>
+            <li key={index} className="relative">
+              <NavLink
+                to={item.path}
+                className={({ isActive }) =>
+                  `flex p-4 rounded-md ${
+                    isActive
+                      ? 'text-black font-semibold'
+                      : 'text-gray-500 hover:text-black '
+                  }`
+                }
+                onClick={() => setIsSidebarOpen(false)}
+              >
+                
+                <div
+                  className={`absolute left-0 top-0 h-full w-1.5 rounded-r-lg ${
+                    location.pathname === item.path ? 'bg-black' : ''
+                  }`}
+                ></div>
+
+                <span className="text-2xl ml-8">{item.icon}</span>
+                <span className="font-medium ml-4">{item.name}</span>
+              </NavLink>
             </li>
           ))}
-      </ul>
+        </ul>
+      </div>
+
+      {/* Overlay for Sidebar in Mobile View */}
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black opacity-30 lg:hidden"
+          onClick={() => setIsSidebarOpen(false)}
+        ></div>
+      )}
     </div>
   );
 };

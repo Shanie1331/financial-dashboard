@@ -32,14 +32,14 @@ const SettingsTabs: React.FC<SettingsTabsProps> = ({ user, setUser }) => {
   };
 
   return (
-    <div className="p-4 bg-white shadow-md rounded-md">
-      <div className="flex space-x-4 border-b pb-2">
+    <div className="p-4 bg-white rounded-3xl">
+      <div className="flex space-x-4 border-b ">
         {tabs.map((tab) => (
           <button
             key={tab}
             className={`px-4 py-2 ${
               activeTab === tab
-                ? 'border-b-2 border-blue-500 text-blue-500'
+                ? 'border-b-4 border-[#232323] '
                 : 'text-gray-500'
             }`}
             onClick={() => setActiveTab(tab)}

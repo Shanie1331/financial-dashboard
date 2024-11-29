@@ -1,22 +1,35 @@
-import React from 'react';
-import { Bar } from 'react-chartjs-2';
-import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, Legend } from 'chart.js';
+import React from "react";
+import { Bar } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  Tooltip,
+  Legend,
+} from "chart.js";
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
 const WeeklyActivityChart = () => {
   const data = {
-    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    labels: ["Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"],
     datasets: [
       {
-        label: 'Deposits',
-        data: [200, 300, 400, 500, 600, 700, 800],
-        backgroundColor: 'rgba(75, 192, 192, 0.6)',
+        label: "Withdraw",
+        data: [480, 350, 320, 480, 150, 390, 400],
+        backgroundColor: "#232323",
+        borderRadius: 8,
+        maxBarThickness: 15,
+        borderSkipped: false,
       },
       {
-        label: 'Withdrawals',
-        data: [150, 250, 350, 450, 550, 650, 750],
-        backgroundColor: 'rgba(255, 99, 132, 0.6)',
+        label: "Deposit",
+        data: [240, 120, 280, 380, 250, 250, 330],
+        backgroundColor: "#396AFF",
+        borderRadius: 8,
+        maxBarThickness: 15,
+        borderSkipped: false,
       },
     ],
   };
@@ -25,14 +38,60 @@ const WeeklyActivityChart = () => {
     responsive: true,
     plugins: {
       legend: {
-        position: 'top' as const,
+        position: "top" as const,
+        align: "end" as const,
+        labels: {
+          usePointStyle: true,
+          font: {
+            size: 12,
+          },
+        },
+      },
+      tooltip: {
+        backgroundColor: "#ffffff",
+        titleColor: "#1D1D1D",
+        bodyColor: "#4F8FF0",
+        borderColor: "#E5E7EB",
+        titleFont: { size: 14 },
+        bodyFont: { size: 12 },
+      },
+    },
+    scales: {
+      x: {
+        grid: {
+          display: false,
+        },
+        ticks: {
+          color: "#718EBF",
+          font: {
+            size: 13,
+            weight: 400,
+          },
+        },
+        barPercentage: 0.7,
+        categoryPercentage: 0.8,
+      },
+      y: {
+        beginAtZero: true,
+        max: 500,
+        grid: {
+          color: "#F3F3F5",
+        },
+        ticks: {
+          stepSize: 100, 
+          color: "#718EBF",
+          font: {
+            size: 13,
+            weight: 400,
+          },
+        },
       },
     },
   };
 
   return (
-    <div className="p-4 bg-white shadow-md rounded-md">
-      <h4 className="text-lg font-bold mb-2">Weekly Activity</h4>
+    <div
+      className="p-10 bg-white rounded-3xl">
       <Bar data={data} options={options} />
     </div>
   );

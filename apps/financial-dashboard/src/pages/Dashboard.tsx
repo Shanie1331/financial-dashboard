@@ -6,66 +6,95 @@ import {
   ExpenseStatisticsChart,
   BalanceHistoryChart,
   QuickTransfer,
-  Sidebar,
-  Header,
 } from '@financial-dashboard/shared-ui';
 import { mockCards, mockTransactions } from '@financial-dashboard/shared-utils';
 
 const Dashboard = () => {
   return (
-        <div className="p-4 space-y-6">
-          Cards Section
-          <div>
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-xl font-bold">My Cards</h3>
-              <button
-                className="text-blue-500 hover:underline"
-                onClick={() => console.log('Navigating to all cards')}
-              >
-                See All
-              </button>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {mockCards.map((card, index) => (
+    <div className="bg-gray-100 p-10">
+      <div className={'gap-6 pb-8'} style={{ display: 'flex', flex: 1 }}>
+        <div style={{ display: 'flex', flex: 7, flexDirection: 'column' }}>
+          <div className="flex justify-between mb-4">
+            <h3 className="text-2xl font-semibold text-[#343C6A]">My Cards</h3>
+            <button
+              className="text-base text-[#343C6A] font-semibold"
+              onClick={() => console.log('Navigating to all cards')}
+            >
+              See All
+            </button>
+          </div>
+          <div className="flex justify-between flex-wrap gap-8">
+            {mockCards.map((card, index) => (
+              <div key={index} className="flex-1">
                 <Card
-                  key={index}
-                  title={card.title}
                   balance={card.balance}
+                  cardHolder={card.cardHolder}
+                  validThru={card.validThru}
                   cardNumber={card.cardNumber}
+                  isDark={card.isDark}
                 />
-              ))}
-            </div>
-          </div>
-
-          Recent Transactions
-          <div>
-            <h3 className="text-xl font-bold mb-2">Recent Transactions</h3>
-            <div className="space-y-2">
-              {mockTransactions.map((transaction, index) => (
-                <Transaction
-                  key={index}
-                  icon={transaction.icon}
-                  description={transaction.description}
-                  date={transaction.date}
-                  amount={transaction.amount}
-                  isPositive={transaction.isPositive}
-                />
-              ))}
-            </div>
-          </div>
-
-          Weekly Activity & Expense Statistics
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <WeeklyActivityChart />
-            <ExpenseStatisticsChart />
-          </div>
-
-          Quick Transfer & Balance History
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <QuickTransfer />
-            <BalanceHistoryChart />
+              </div>
+            ))}
           </div>
         </div>
+        <div style={{ display: 'flex', flex: 3, flexDirection: 'column' }}>
+          <div className="flex justify-between mb-4">
+            <h3 className="text-2xl font-semibold text-[#343C6A]">
+              Recent Transactions
+            </h3>
+          </div>
+          <div className="space-y-8 bg-white p-6 text-base rounded-3xl h-[250px]">
+            {mockTransactions.map((transaction, index) => (
+              <Transaction
+                key={index}
+                icon={transaction.icon}
+                description={transaction.description}
+                date={transaction.date}
+                amount={transaction.amount}
+                isPositive={transaction.isPositive}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+      <div className={'gap-6 pb-8'} style={{ display: 'flex', flex: 1 }}>
+        <div style={{ display: 'flex', flex: 7, flexDirection: 'column' }}>
+          <div className="flex justify-between mb-4">
+            <h3 className="text-2xl font-semibold text-[#343C6A]">
+              Weekly Activity
+            </h3>
+          </div>
+          <WeeklyActivityChart />
+        </div>
+        <div style={{ display: 'flex', flex: 3, flexDirection: 'column' }}>
+          <div className="flex justify-between mb-4">
+            <h3 className="text-2xl font-semibold text-[#343C6A]">
+              Expense Statistics
+            </h3>
+          </div>
+          <ExpenseStatisticsChart />
+        </div>
+      </div>
+
+      <div className={'gap-6 pb-8'} style={{ display: 'flex', flex: 1 }}>
+        <div style={{ display: 'flex', flex: 4, flexDirection: 'column' }}>
+          <div className="flex justify-between mb-4">
+            <h3 className="text-2xl font-semibold text-[#343C6A]">
+              Quick Transfer
+            </h3>
+          </div>
+          <QuickTransfer />
+        </div>
+        <div style={{ display: 'flex', flex: 6, flexDirection: 'column' }}>
+          <div className="flex justify-between mb-4">
+            <h3 className="text-2xl font-semibold text-[#343C6A]">
+              Balance History
+            </h3>
+          </div>
+          <BalanceHistoryChart />
+        </div>
+      </div>
+    </div>
   );
 };
 

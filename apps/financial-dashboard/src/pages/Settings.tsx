@@ -6,8 +6,7 @@ const Settings = () => {
   const { user, setUser } = useUser();
 
   return (
-    <div className="p-4 space-y-4">
-      <h2 className="text-2xl font-bold">Settings</h2>
+    <div className="p-10 space-y-4">
       <SettingsTabs user={user} setUser={setUser} />
     </div>
   );

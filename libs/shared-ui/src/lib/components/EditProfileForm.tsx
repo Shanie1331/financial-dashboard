@@ -26,7 +26,9 @@ const EditProfileForm: React.FC<EditProfileFormProps> = ({ user, setUser }) => {
     name: Yup.string().required('Name is required'),
     email: Yup.string().email('Invalid email').required('Email is required'),
     username: Yup.string().required('Username is required'),
-    password: Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
+    password: Yup.string()
+      .min(6, 'Password must be at least 6 characters')
+      .required('Password is required'),
     dateOfBirth: Yup.string().required('Date of Birth is required'),
     presentAddress: Yup.string().required('Present Address is required'),
     permanentAddress: Yup.string().required('Permanent Address is required'),
@@ -57,109 +59,176 @@ const EditProfileForm: React.FC<EditProfileFormProps> = ({ user, setUser }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-      <div>
-        <label className="block text-sm font-medium">Name</label>
-        <input
-          type="text"
-          {...register('name')}
-          className="w-full px-4 py-2 border rounded-md"
-        />
-        <p className="text-red-500 text-sm">{errors.name?.message}</p>
-      </div>
-      <div>
-        <label className="block text-sm font-medium">Email</label>
-        <input
-          type="email"
-          {...register('email')}
-          className="w-full px-4 py-2 border rounded-md"
-        />
-        <p className="text-red-500 text-sm">{errors.email?.message}</p>
-      </div>
-      <div>
-        <label className="block text-sm font-medium">Username</label>
-        <input
-          type="text"
-          {...register('username')}
-          className="w-full px-4 py-2 border rounded-md"
-        />
-        <p className="text-red-500 text-sm">{errors.username?.message}</p>
-      </div>
-      <div>
-        <label className="block text-sm font-medium">Password</label>
-        <input
-          type="password"
-          {...register('password')}
-          className="w-full px-4 py-2 border rounded-md"
-        />
-        <p className="text-red-500 text-sm">{errors.password?.message}</p>
-      </div>
-      <div>
-        <label className="block text-sm font-medium">Date of Birth</label>
-        <input
-          type="date"
-          {...register('dateOfBirth')}
-          className="w-full px-4 py-2 border rounded-md"
-        />
-        <p className="text-red-500 text-sm">{errors.dateOfBirth?.message}</p>
-      </div>
-      <div>
-        <label className="block text-sm font-medium">Present Address</label>
-        <input
-          type="text"
-          {...register('presentAddress')}
-          className="w-full px-4 py-2 border rounded-md"
-        />
-        <p className="text-red-500 text-sm">{errors.presentAddress?.message}</p>
-      </div>
-      <div>
-        <label className="block text-sm font-medium">Permanent Address</label>
-        <input
-          type="text"
-          {...register('permanentAddress')}
-          className="w-full px-4 py-2 border rounded-md"
-        />
-        <p className="text-red-500 text-sm">{errors.permanentAddress?.message}</p>
-      </div>
-      <div>
-        <label className="block text-sm font-medium">City</label>
-        <input
-          type="text"
-          {...register('city')}
-          className="w-full px-4 py-2 border rounded-md"
-        />
-        <p className="text-red-500 text-sm">{errors.city?.message}</p>
-      </div>
-      <div>
-        <label className="block text-sm font-medium">Postal Code</label>
-        <input
-          type="text"
-          {...register('postalCode')}
-          className="w-full px-4 py-2 border rounded-md"
-        />
-        <p className="text-red-500 text-sm">{errors.postalCode?.message}</p>
-      </div>
-      <div>
-        <label className="block text-sm font-medium">Country</label>
-        <input
-          type="text"
-          {...register('country')}
-          className="w-full px-4 py-2 border rounded-md"
-        />
-        <p className="text-red-500 text-sm">{errors.country?.message}</p>
-      </div>
-      <div>
-        <label className="block text-sm font-medium">Profile Picture</label>
-        <input
-          type="file"
-          accept="image/*"
-          className="w-full px-4 py-2 border rounded-md"
-        />
-      </div>
-      <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
-        Save
-      </button>
-    </form>
+    <div className="p-6 bg-white rounded-3xl">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="space-y-6 sm:space-y-4 md:flex-row md:space-x-8 md:space-y-0"
+      >
+        <div className="flex flex-col  sm:flex-row sm:space-x-8 ">
+          <div>
+            <div className="relative mb-6">
+              <img
+                src="https://png.pngtree.com/thumb_back/fh260/background/20230609/pngtree-cartoon-avatar-of-a-man-in-a-jacket-image_2898443.jpg"
+                alt="Profile"
+                className="w-24 h-24 rounded-full border-gray-300"
+              />
+              <button className="absolute bottom-0 right-0 bg-black text-white p-2 rounded-full shadow-md hover:bg-gray-800">
+                ✎
+              </button>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 flex-1 w-full">
+            <div>
+              <label className="block text-sm font-medium text-gray-500">
+                Your Name
+              </label>
+              <input
+                type="text"
+                {...register('name')}
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                placeholder="Charlene Reed"
+              />
+              <p className="text-red-500 text-sm">{errors.name?.message}</p>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-500">
+                User Name
+              </label>
+              <input
+                type="text"
+                {...register('username')}
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                placeholder="Charlene Reed"
+              />
+              <p className="text-red-500 text-sm">{errors.username?.message}</p>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-500">
+                Email
+              </label>
+              <input
+                type="email"
+                {...register('email')}
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                placeholder="charlenereed@gmail.com"
+              />
+              <p className="text-red-500 text-sm">{errors.email?.message}</p>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-500">
+                Password
+              </label>
+              <input
+                type="password"
+                {...register('password')}
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                placeholder="**********"
+              />
+              <p className="text-red-500 text-sm">{errors.password?.message}</p>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-500">
+                Date of Birth
+              </label>
+              <input
+                type="date"
+                {...register('dateOfBirth')}
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                placeholder="25 January 1990"
+              />
+              <p className="text-red-500 text-sm">
+                {errors.dateOfBirth?.message}
+              </p>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-500">
+                Present Address
+              </label>
+              <input
+                type="text"
+                {...register('presentAddress')}
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                placeholder="San Jose, California, USA"
+              />
+              <p className="text-red-500 text-sm">
+                {errors.presentAddress?.message}
+              </p>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-500">
+                Permanent Address
+              </label>
+              <input
+                type="text"
+                {...register('permanentAddress')}
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                placeholder="San Jose, California, USA"
+              />
+              <p className="text-red-500 text-sm">
+                {errors.permanentAddress?.message}
+              </p>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-500">
+                City
+              </label>
+              <input
+                type="text"
+                {...register('city')}
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                placeholder="San Jose"
+              />
+              <p className="text-red-500 text-sm">{errors.city?.message}</p>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-500">
+                Postal Code
+              </label>
+              <input
+                type="text"
+                {...register('postalCode')}
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                placeholder="45962"
+              />
+              <p className="text-red-500 text-sm">
+                {errors.postalCode?.message}
+              </p>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-500">
+                Country
+              </label>
+              <input
+                type="text"
+                {...register('country')}
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                placeholder="USA"
+              />
+              <p className="text-red-500 text-sm">{errors.country?.message}</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex justify-center sm:justify-end mt-10">
+          <button
+            type="submit"
+            className="bg-black text-white py-2 px-6 rounded-md hover:bg-gray-800 transition"
+          >
+            Save
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };
 

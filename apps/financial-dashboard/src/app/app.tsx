@@ -1,16 +1,3 @@
-// import NxWelcome from './nx-welcome';
-
-// export function App() {
-//   return (
-//     <div>
-//       <div className="text-blue-900 text-">Hello, Tailwind!</div>
-//       <NxWelcome title="financial-dashboard" />
-//     </div>
-//   );
-// }
-
-// export default App;
-
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { UserProvider } from '../context/UserContext';
@@ -21,32 +8,29 @@ import { Header, Sidebar } from '@financial-dashboard/shared-ui';
 const App = () => {
   return (
     <UserProvider>
-      <div>
-      <div className="flex h-screen bg-gray-100">
-      {/* Sidebar */}
+      <Router>
+        <div className="flex h-screen bg-gray-100">
+          {/* Sidebar */}
 
-      {/* Main Content */}
-      <div className="grid grid-cols-[15%,85%] w-screen h-screen">
-        <div>
-          <Sidebar/>
+          <Sidebar />
+
+          {/* Main Content */}
+          <div className="flex-1 flex flex-col">
+            {/* Header */}
+            <Header isTitleVisible={false} title="Overview" />
+
+            {/* Page Content */}
+            <div className="flex-1 overflow-y-auto">
+              <Routes>
+                <Route path="/" element={<Dashboard />} />
+                <Route path="/settings" element={<Settings />} />
+              </Routes>
+            </div>
           </div>
-        <div><Header isTitleVisible={false} title={'Overview'}/>
-        <Router>
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/settings" element={<Settings />} />
-        </Routes>
-      </Router>
         </div>
-    </div>
-    
-     
-      </div>
-    </div>
+      </Router>
     </UserProvider>
   );
 };
 
 export default App;
-
-
