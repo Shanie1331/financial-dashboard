@@ -18,8 +18,10 @@ const Dashboard: React.FC<DashboardProps> = ({ setTitle }) => {
     setTitle('Overview');
   }, [setTitle]);
 
+  // return null
+
   return (
-    <div className="bg-gray-100 p-10">
+    <div className=" p-10">
       <div className={'gap-6 pb-8'} style={{ display: 'flex', flex: 1 }}>
         <div style={{ display: 'flex', flex: 7, flexDirection: 'column' }}>
           <div className="flex justify-between mb-4">

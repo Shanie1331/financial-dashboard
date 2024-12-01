@@ -18,7 +18,7 @@ const Transaction: React.FC<TransactionProps> = ({
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center space-x-4">
-        <div className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100">
+        <div className="flex items-center justify-center w-10 h-10 rounded-full ">
           {icon}
         </div>
         <div>

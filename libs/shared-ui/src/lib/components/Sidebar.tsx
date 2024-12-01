@@ -18,7 +18,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <div>
+    <>
       <div className="lg:hidden flex items-center  h-[100px]  px-4 py-2 bg-white border-b">
         <button
           className="text-3xl text-gray-700 focus:outline-none"
@@ -29,7 +29,7 @@ const Sidebar = () => {
       </div>
 
       <div
-        className={`fixed lg:static top-0 left-0 h-screen w-64 bg-white border-r transform ${
+        className={`top-0 left-0 w-64 bg-white border-r transform ${
           isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
         } transition-transform lg:translate-x-0 z-50`}
       >
@@ -56,7 +56,6 @@ const Sidebar = () => {
                 }
                 onClick={() => setIsSidebarOpen(false)}
               >
-                
                 <div
                   className={`absolute left-0 top-0 h-full w-1.5 rounded-r-lg ${
                     location.pathname === item.path ? 'bg-black' : ''
@@ -77,7 +76,7 @@ const Sidebar = () => {
           onClick={() => setIsSidebarOpen(false)}
         ></div>
       )}
-    </div>
+    </>
   );
 };
 

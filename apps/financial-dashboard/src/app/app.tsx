@@ -11,11 +11,11 @@ const App = () => {
   return (
     <UserProvider>
       <Router>
-        <div className="flex h-screen bg-gray-100">
+        <div className="flex h-screen">
           <Sidebar />
           <div className="flex-1 flex flex-col">
             <Header isTitleVisible={false} title={title} />
-            <div className="flex-1 overflow-y-auto">
+            {/* <div className="flex-1 overflow-y-auto"> */}
               <Routes>
                 <Route path="/" element={<Dashboard setTitle={setTitle} />} />
                 <Route
@@ -24,7 +24,7 @@ const App = () => {
                 />
               </Routes>
             </div>
-          </div>
+          {/* </div> */}
         </div>
       </Router>
     </UserProvider>

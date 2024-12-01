@@ -47,13 +47,13 @@ const QuickTransfer: React.FC = () => {
             <p className="text-sm text-gray-500">{contact.role}</p>
           </div>
         ))}
-        <div className="flex items-center justify-center w-[50px] h-[50px] bg-gray-100 rounded-full">
+        <div className="flex items-center justify-center w-[50px] h-[50px] rounded-full">
           <span className="text-xl text-gray-400">{'>'}</span>
         </div>
       </div>
       <div className="flex items-center space-x-4">
         <p className=" text-sm text-gray-500 mb-1">Write Amount</p>
-        <div className="bg-gray-100 px-4 py-3 rounded-full flex items-center">
+        <div className=" px-4 py-3 rounded-full flex items-center">
           <input
             type="number"
             placeholder="525.50"
