@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Card,
   Transaction,
@@ -9,7 +9,15 @@ import {
 } from '@financial-dashboard/shared-ui';
 import { mockCards, mockTransactions } from '@financial-dashboard/shared-utils';
 
-const Dashboard = () => {
+interface DashboardProps {
+  setTitle: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const Dashboard: React.FC<DashboardProps> = ({ setTitle }) => {
+  useEffect(() => {
+    setTitle('Overview');
+  }, [setTitle]);
+
   return (
     <div className="bg-gray-100 p-10">
       <div className={'gap-6 pb-8'} style={{ display: 'flex', flex: 1 }}>

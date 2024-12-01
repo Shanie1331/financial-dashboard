@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 
 const Sidebar = () => {
-  const location = useLocation(); // Get current pathname
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // State to toggle sidebar
+  const location = useLocation();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const menuItems = [
     { name: 'Dashboard', icon: '🏠', path: '/' },
@@ -19,7 +19,6 @@ const Sidebar = () => {
 
   return (
     <div>
-      {/* Hamburger Menu for Mobile View */}
       <div className="lg:hidden flex items-center  h-[100px]  px-4 py-2 bg-white border-b">
         <button
           className="text-3xl text-gray-700 focus:outline-none"
@@ -29,13 +28,11 @@ const Sidebar = () => {
         </button>
       </div>
 
-      {/* Sidebar */}
       <div
         className={`fixed lg:static top-0 left-0 h-screen w-64 bg-white border-r transform ${
           isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
         } transition-transform lg:translate-x-0 z-50`}
       >
-        {/* Logo Section */}
         <div className="flex items-center w-full h-[100px] px-4">
           <div className="flex items-center space-x-2">
             <div className="w-8 h-8 bg-black rounded-md flex items-center justify-center">
@@ -45,7 +42,6 @@ const Sidebar = () => {
           </div>
         </div>
 
-        {/* Menu Items */}
         <ul className="flex flex-col">
           {menuItems.map((item, index) => (
             <li key={index} className="relative">
@@ -75,7 +71,6 @@ const Sidebar = () => {
         </ul>
       </div>
 
-      {/* Overlay for Sidebar in Mobile View */}
       {isSidebarOpen && (
         <div
           className="fixed inset-0 bg-black opacity-30 lg:hidden"

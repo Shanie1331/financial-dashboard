@@ -13,6 +13,20 @@ export const mockCards = [
       cardHolder:"Eddy Cusuma",
       isDark: false
   },
+  // {
+  //   balance: '$10,000',
+  //   cardNumber: '**** **** **** 1234',
+  //   validThru: '12/22',
+  //    cardHolder:"Eddy Cusuma",
+  //    isDark: true
+  // },
+  // {
+  //   balance: '$5,500',
+  //   cardNumber: '**** **** **** 5678',
+  //    validThru: '12/22',
+  //     cardHolder:"Eddy Cusuma",
+  //     isDark: false
+  // }
 ];
 
 export const mockTransactions = [
