@@ -1,18 +1,16 @@
 import React, { useRef, useEffect, useState } from 'react';
 import * as d3 from 'd3';
 
-// Define the data type
 type DataPoint = {
   month: string;
   value: number;
 };
 
-const BalanceHistoryChart = () => {
+const BalanceHistoryChart = ({isMobileView}: {isMobileView: boolean}) => {
   const chartRef = useRef<SVGSVGElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const [width, setWidth] = useState(400); // Default width
+  const [width, setWidth] = useState(300); // Default width
 
-  // Data with explicit type
   const data: DataPoint[] = [
     { month: 'Jul', value: 170 },
     { month: 'Aug', value: 280 },
@@ -48,14 +46,11 @@ const BalanceHistoryChart = () => {
     if (chartRef.current) {
       const svg = d3.select(chartRef.current);
 
-      // Calculate inner dimensions
       const innerWidth = width - margin.left - margin.right;
       const innerHeight = height - margin.top - margin.bottom;
 
-      // Clear existing content
       svg.selectAll('*').remove();
 
-      // Create scales
       const xScale = d3
         .scalePoint()
         .domain(data.map((d) => d.month))
@@ -67,12 +62,10 @@ const BalanceHistoryChart = () => {
         .domain([0, d3.max(data, (d) => d.value) ?? 800])
         .range([innerHeight, 0]);
 
-      // Create a group for the chart
       const chartGroup = svg
         .append('g')
         .attr('transform', `translate(${margin.left},${margin.top})`);
 
-      // Add vertical gridlines
       chartGroup
         .selectAll('.vertical-grid-line')
         .data(data.slice(1))
@@ -83,11 +76,10 @@ const BalanceHistoryChart = () => {
         .attr('x2', (d) => xScale(d.month) ?? 0)
         .attr('y1', 0)
         .attr('y2', innerHeight)
-        .attr('stroke', '#E5E7EB') // Grey color
+        .attr('stroke', '#E5E7EB') 
         .attr('stroke-width', 1)
-        .attr('stroke-dasharray', '2,2'); // Dotted line
+        .attr('stroke-dasharray', '2,2');
 
-      // Add horizontal gridlines
       chartGroup
         .selectAll('.horizontal-grid-line')
         .data(yScale.ticks(5))
@@ -102,7 +94,6 @@ const BalanceHistoryChart = () => {
         .attr('stroke-width', 1)
         .attr('stroke-dasharray', '2,2');
 
-      // Add x-axis
       const xAxis = d3.axisBottom(xScale).ticks(5);
 
       chartGroup
@@ -113,7 +104,6 @@ const BalanceHistoryChart = () => {
         .attr('stroke', '#E5E7EB')
         .attr('stroke-dasharray', '2,2');
 
-      // Add y-axis
       const yAxis = d3.axisLeft(yScale).ticks(5);
 
       chartGroup
@@ -123,13 +113,11 @@ const BalanceHistoryChart = () => {
         .attr('stroke', '#E5E7EB')
         .attr('stroke-dasharray', '2,2');
 
-      // Add tick text styling
       chartGroup
         .selectAll('text')
         .style('fill', '#6B7280')
         .style('font-size', '12px');
 
-      // Add line path
       const lineGenerator = d3
         .line<DataPoint>()
         .x((d) => xScale(d.month) ?? 0)
@@ -144,7 +132,6 @@ const BalanceHistoryChart = () => {
         .attr('stroke', '#0052cc')
         .attr('stroke-width', 2);
 
-      // Add gradient for the fill
       const gradient = svg
         .append('defs')
         .append('linearGradient')
@@ -165,7 +152,6 @@ const BalanceHistoryChart = () => {
         .attr('stop-color', '#0052cc')
         .attr('stop-opacity', 0);
 
-      // Add the area fill
       chartGroup
         .append('path')
         .datum(data)
@@ -185,9 +171,9 @@ const BalanceHistoryChart = () => {
   return (
     <div
       ref={containerRef}
-      className="p-4 bg-white rounded-3xl shadow-md w-full"
+      className="p-2 lg:p-4 bg-white rounded-3xl shadow-md w-full"
     >
-      <svg ref={chartRef} width={width} height={height} />
+      <svg ref={chartRef} width={isMobileView? 300: width} height={height} />
     </div>
   );
 };

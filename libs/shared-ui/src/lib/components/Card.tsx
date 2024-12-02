@@ -5,7 +5,7 @@ interface CardProps {
   cardHolder: string;
   validThru: string;
   cardNumber: string;
-  isDark?: boolean; // To differentiate between dark and light cards
+  isDark?: boolean;
 }
 
 const Card: React.FC<CardProps> = ({ balance, cardHolder, validThru, cardNumber, isDark = false }) => {

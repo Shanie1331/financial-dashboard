@@ -11,7 +11,7 @@ import {
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
-const WeeklyActivityChart = () => {
+const WeeklyActivityChart = ({isMobileView}: {isMobileView: boolean}) => {
   const data = {
     labels: ["Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"],
     datasets: [
@@ -20,7 +20,7 @@ const WeeklyActivityChart = () => {
         data: [480, 350, 320, 480, 150, 390, 400],
         backgroundColor: "#232323",
         borderRadius: 8,
-        maxBarThickness: 15,
+        maxBarThickness: isMobileView? 8: 15,
         borderSkipped: false,
       },
       {
@@ -28,7 +28,7 @@ const WeeklyActivityChart = () => {
         data: [240, 120, 280, 380, 250, 250, 330],
         backgroundColor: "#396AFF",
         borderRadius: 8,
-        maxBarThickness: 15,
+        maxBarThickness: isMobileView? 8: 15,
         borderSkipped: false,
       },
     ],
@@ -36,6 +36,7 @@ const WeeklyActivityChart = () => {
 
   const options = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: "top" as const,
@@ -78,7 +79,7 @@ const WeeklyActivityChart = () => {
           color: "#F3F3F5",
         },
         ticks: {
-          stepSize: 100, 
+          stepSize: 100,
           color: "#718EBF",
           font: {
             size: 13,
@@ -90,9 +91,10 @@ const WeeklyActivityChart = () => {
   };
 
   return (
-    <div
-      className="p-10 bg-white rounded-3xl">
-      <Bar data={data} options={options} />
+    <div className={` w-full ${isMobileView? 'p-5 h-[250px]': ' p-10 h-[380px]'} bg-white rounded-3xl`}>
+      <div className="relative h-full w-full">
+        <Bar data={data} options={options} />
+      </div>
     </div>
   );
 };

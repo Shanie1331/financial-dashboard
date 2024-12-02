@@ -4,18 +4,20 @@ import { UserProvider } from '../context/UserContext';
 import Dashboard from '../pages/Dashboard';
 import Settings from '../pages/Settings';
 import { Header, Sidebar } from '@financial-dashboard/shared-ui';
+import useIsMobile from '../hooks/useIsMobile';
 
 const App = () => {
   const [title, setTitle] = useState('');
-
+  const isMobileView = useIsMobile()
   return (
     <UserProvider>
       <Router>
-        <div className="flex h-screen">
-          <Sidebar />
+        <div className="flex">
+          {!isMobileView && <div className='hidden lg:block sm:hidden'>
+          <Sidebar isMobileView={isMobileView}/>
+          </div>}
           <div className="flex-1 flex flex-col">
-            <Header isTitleVisible={false} title={title} />
-            {/* <div className="flex-1 overflow-y-auto"> */}
+            <Header isMobileView={isMobileView} isTitleVisible={false} title={title} />
               <Routes>
                 <Route path="/" element={<Dashboard setTitle={setTitle} />} />
                 <Route
@@ -24,7 +26,6 @@ const App = () => {
                 />
               </Routes>
             </div>
-          {/* </div> */}
         </div>
       </Router>
     </UserProvider>

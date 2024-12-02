@@ -6,7 +6,9 @@ interface Contact {
   profilePicture: string;
 }
 
-const QuickTransfer: React.FC = () => {
+const QuickTransfer: React.FC<{ isMobileView: boolean }> = ({
+  isMobileView,
+}) => {
   const contacts: Contact[] = [
     {
       name: 'Livia Bator',
@@ -29,7 +31,13 @@ const QuickTransfer: React.FC = () => {
   ];
 
   return (
-    <div className="p-6 bg-white rounded-3xl">
+    <div
+      className={
+        !isMobileView
+          ? 'p-6 bg-white rounded-3xl h-[312px]'
+          : 'p-4 bg-white rounded-3xl'
+      }
+    >
       <div className="flex items-center justify-between mt-4 mb-6 ">
         {contacts.map((contact, index) => (
           <div
@@ -53,14 +61,23 @@ const QuickTransfer: React.FC = () => {
       </div>
       <div className="flex items-center space-x-4">
         <p className=" text-sm text-gray-500 mb-1">Write Amount</p>
-        <div className=" px-4 py-3 rounded-full flex items-center">
+        <div
+          className={`${
+            isMobileView
+              ? 'w-[50px] px-4 py-3 rounded-full flex items-center'
+              : 'px-4 py-3 rounded-full flex items-center'
+          }`}
+        >
           <input
             type="number"
             placeholder="525.50"
             className="bg-transparent outline-none w-full text-gray-800 text-base font-medium pl-2"
           />
         </div>
-        <button className="bg-black text-white py-2 px-6 rounded-full flex items-center shadow-md hover:bg-gray-800 transition">
+        <button
+          className="bg-black text-white py-2 px-6 rounded-full flex items-center shadow-md hover:bg-gray-800 transition"
+          onClick={() => alert('Coming Soon')}
+        >
           <span className="font-medium">Send</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
